@@ -3,7 +3,7 @@ import redis
 class DatabaseHandler:
 
     def publica_dati_sse():
-
+        print("stampare dati")
 
 
 
