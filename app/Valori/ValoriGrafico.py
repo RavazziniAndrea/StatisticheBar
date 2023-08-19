@@ -1,4 +1,4 @@
-import DatiNonValidiException
+from Exceptions.DatiNonValidiException import DatiNonValidiException
 
 class ValoriGrafico:
 

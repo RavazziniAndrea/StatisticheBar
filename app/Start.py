@@ -4,13 +4,13 @@ from threading import Thread
 from time import sleep
 import redis as Redis
 import os
-import ValoriGrafico
-import DatiNonValidiException
+from Valori.ValoriGrafico import ValoriGrafico
 
 template_dir = os.path.abspath("web/templates")
+static_dir   = os.path.abspath("web/static")
 app = Flask(__name__, template_folder=template_dir,
             static_url_path='', 
-            static_folder='web/static')
+            static_folder=static_dir)
 
 redis = Redis.Redis(host="172.17.0.2", port="6379")
 
