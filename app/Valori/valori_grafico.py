@@ -1,4 +1,4 @@
-from app.Exceptions.dati_non_validi_exception import DatiNonValidiException
+from Exceptions.dati_non_validi_exception import DatiNonValidiException
 
 class ValoriGrafico:
 
@@ -8,7 +8,7 @@ class ValoriGrafico:
         self.grafico = grafico
         self.tempo = tempo
 
-    def check_valid(grafico, tempo):
+    def check_valid(self, grafico, tempo):
         return grafico == None or tempo == None 
 
     def get_grafico(self):

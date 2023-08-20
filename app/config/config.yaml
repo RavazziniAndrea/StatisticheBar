@@ -1,5 +1,0 @@
-database:
-  db_address : "10.0.54.11" 
-  db_name    : "barboun"
-  db_user    : "barboun"
-  db_passwd  : "indecifrabile"
