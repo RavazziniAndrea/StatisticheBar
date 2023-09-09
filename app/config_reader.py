@@ -3,7 +3,7 @@ from os import path
 
 class ConfigReader:
 
-    config_filename = path.abspath("app/config/config.json")
+    config_filename = path.abspath("config/config.json")
     db_address = ""
     db_name    = ""
     db_user    = ""
