@@ -53,9 +53,11 @@ def stream():
 def index():
     return render_template("index.html")
 
+
 @app.route('/statistiche')
 def statistiche():
     return render_template("statistiche.html")
+
 
 @app.route('/grafici', methods=["POST"])
 def grafici ():
@@ -67,24 +69,14 @@ def grafici ():
     print("dati salvati: "+grafico + " -- " +tempo)
     return "AjaxBackendFinito"
 
+
 @app.route('/about')
 def about():
     return render_template("about.html")
 
+
 def get_dati_db():
     database_handler.publica_dati_sse()
-
-#     print("Dentro thread")
-#     count = 0
-#     global stop
-#     stop = False
-#     while not stop:
-#         if(count > 100): count = 0
-#         count = count+1
-#         redis.publish("datidb", count)
-#         sleep(1)
-#     print("Fine thread")
-
 
 
 if __name__ == "__main__":

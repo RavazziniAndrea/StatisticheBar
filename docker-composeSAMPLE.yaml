@@ -1,0 +1,35 @@
+version: "3"
+services:
+  db:
+    image: postgres:14.7
+    environment:
+        - POSTGRES_USER=<YOUR_USER>
+        - POSTGRES_PASSWORD=<YOUR_PASSWD>
+    
+    ports:
+      - "5432:5432"
+    networks:
+      - my-network
+    volumes:
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /app
+    ports:
+      - "10481:10481"
+    volumes:
+      - .:/app
+    networks:
+      - my-network
+    depends_on:
+      - db
+    
+volumes:
+  postgres-data:
+
+networks:
+  my-network:
+    driver: bridge
+    
