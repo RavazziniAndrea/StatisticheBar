@@ -19,12 +19,6 @@ redis = Redis.Redis(host="172.17.0.2", port="6379")
 valori = None
 stop = False
 
-config = ConfigReader()
-if not config.valida_config():
-    print("Errore lettura config")
-    exit(1)
-
-
 def event_stream():
     pubsub = redis.pubsub()
     pubsub.subscribe('datidb')
@@ -43,7 +37,7 @@ def event_stream():
 def stream():
     # TODO Gestire il stop thread, da rimettere a True
     print("Avvio thread")
-    thread = Thread(target=get_dati_db)
+    thread = Thread(target=get_dati)
     thread.start()
     print("Thread avviato")
     return Response(event_stream(), mimetype="text/event-stream")
@@ -66,6 +60,8 @@ def grafici ():
     global valori
     valori = ValoriGrafico(grafico, tempo)
 
+    valori.scrivi_grafico()
+
     print("dati salvati: "+grafico + " -- " +tempo)
     return "AjaxBackendFinito"
 
@@ -75,8 +71,8 @@ def about():
     return render_template("about.html")
 
 
-def get_dati_db():
-    database_handler.publica_dati_sse()
+def get_dati():
+    database_handler.get_dati_db()
 
 
 if __name__ == "__main__":

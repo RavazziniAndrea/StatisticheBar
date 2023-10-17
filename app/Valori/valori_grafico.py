@@ -1,4 +1,8 @@
+import redis as Redis
 from Exceptions.dati_non_validi_exception import DatiNonValidiException
+
+
+redis = Redis.Redis(host="172.17.0.2", port="6379")
 
 class ValoriGrafico:
 
@@ -8,8 +12,15 @@ class ValoriGrafico:
         self.grafico = grafico
         self.tempo = tempo
 
+    def scrivi_grafico(self):
+        pubsub = redis.pubsub()
+        pubsub.subscribe("datidb")
+        for mess in pubsub.listen():
+            #TODO, impostare da qui i dati per il tipo di grafico selezionato, po inviarli
+            yield 1
+
     def check_valid(self, grafico, tempo):
-        return grafico == None or tempo == None 
+        return grafico != None and tempo != None 
 
     def get_grafico(self):
         return self.grafico
