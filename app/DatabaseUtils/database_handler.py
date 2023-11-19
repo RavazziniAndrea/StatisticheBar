@@ -39,15 +39,16 @@ def get_dati_db():
                 for i in dati:
                     dato_db = DatoDB.parse_raw_data(i)
                     if dato_db is not None:
-                        list_dati.append(dato_db)
-                        print(str(dato_db.get_qta()) + " " + 
-                            str(dato_db.get_tipo()) + " " +
-                            str(dato_db.get_data()) + " " +
-                            str(dato_db.get_ora()))
-
-                    redis.publish("datidb", str(i))
+                        # print(str(dato_db.get_qta()) + " " + 
+                        #     str(dato_db.get_tipo()) + " " +
+                        #     str(dato_db.get_data()) + " " +
+                        #     str(dato_db.get_ora()))
+                        redis.publish("datidb", dato_db.__str__())
                     #TODO, check che i dati precedenti vengano effettivamente tolti, se no ci si trova con mille dati su redis 
 
+                redis.publish("totaldb", str(list_dati.__len__()))
+
+                print(str(list_dati.__len__()))
             time.sleep(3000)
 
         cursor.close()

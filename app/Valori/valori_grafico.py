@@ -16,7 +16,18 @@ class ValoriGrafico:
         pubsub = redis.pubsub()
         pubsub.subscribe("datidb")
         for mess in pubsub.listen():
-            #TODO, impostare da qui i dati per il tipo di grafico selezionato, po inviarli
+            
+            
+            #TODO in questo punto ottengo tutti i dati dal db. 
+            # 1. Parsare i dati in record (dato_db.py)
+            # 2. Creare le aggregazioni in base al grafico richiesto
+            # 3. Pubblicare i dati in un nuovo redis, che verrà letto da event_stream() che a sua volta passerà al frontend
+            #    I dati pubblicati devono avere tipo grafico, asse x e valori
+
+
+
+
+
             yield 1
 
     def check_valid(self, grafico, tempo):

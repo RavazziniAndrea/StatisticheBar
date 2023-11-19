@@ -12,8 +12,8 @@ function ajaxCall(){
         success: function (response) {
             console.log(response + " TODO Da qui devo tirare fuori i grafici")
         },
-        complete: function(reponse) {
-            console.log("Adesso devo avviare sse")
+        complete: function(response) {
+            console.log("Avvio sse")
             sseCommunication()
         },
         error: function (status, error) {

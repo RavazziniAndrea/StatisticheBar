@@ -20,9 +20,14 @@ redis = Redis.Redis(host="172.17.0.2", port="6379")
 valori = None
 stop = False
 
+
+#Questo è il metodo usato per passare i dati al frontend. Qui devo già avere tutti i dati parsati e pronti da servire 
+#I dati saranno: [tipo_grafico, asse x, valori]
+#E saranno codificati in una stringa, magari in json così js è veloce a tirarli fuori
 def event_stream():
     pubsub = redis.pubsub()
-    pubsub.subscribe('datidb')
+    pubsub.subscribe('totaldb')
+    # pubsub.subscribe('datidb')
     try:
         for message in pubsub.listen():
             # print (message)
@@ -56,8 +61,10 @@ def statistiche():
 
 @app.route('/grafici', methods=["POST"])
 def grafici ():
+
     grafico = request.form['grafico']
-    tempo   = request.form['tempo']
+    tempo =   request.form['tempo']
+
     global valori
     valori = ValoriGrafico(grafico, tempo)
 

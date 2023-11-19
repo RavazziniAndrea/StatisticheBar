@@ -9,7 +9,6 @@ class DatoDB:
     @classmethod
     def parse_raw_data(this_class, data_db):
         return this_class(data_db[0],data_db[1],data_db[2],data_db[3])
-        
 
     def get_qta(self):
         return self.qta
