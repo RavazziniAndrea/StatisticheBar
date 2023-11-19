@@ -1,5 +1,10 @@
 {
   "database":{
+    "db_address" : "10.0.54.104" ,
+    "db_name"    : "barboun",
+    "db_user"    : "barboun",
+    "db_passwd"  : "indecifrabile"
+  },  "database_docker":{
     "db_address" : "172.18.0.3" ,
     "db_name"    : "db_name",
     "db_user"    : "db_user",

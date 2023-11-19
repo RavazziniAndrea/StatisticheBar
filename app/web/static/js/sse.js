@@ -6,7 +6,7 @@ function sseCommunication(){
 
     evtSource.onmessage = function (e) {
         console.log("message: " + e.data);
-        dataArray
+        // dataArray
     }
 
     evtSource.onerror = function (e) {

@@ -14,8 +14,8 @@ app = Flask(__name__, template_folder=template_dir,
             static_url_path='', 
             static_folder=static_dir)
 
-# redis = Redis.Redis(host="172.17.0.2", port="6379")
-redis = Redis.Redis(host="172.18.0.2", port="6379")
+redis = Redis.Redis(host="172.17.0.2", port="6379")
+# redis = Redis.Redis(host="172.18.0.2", port="6379")
 
 valori = None
 stop = False
@@ -25,7 +25,7 @@ def event_stream():
     pubsub.subscribe('datidb')
     try:
         for message in pubsub.listen():
-            print (message)
+            # print (message)
             # TODO gestire il primo messaggio che arriva, dato che è diverso dagli altri
             yield 'data: %s\n\n' % message['data']
     finally:
