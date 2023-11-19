@@ -1,10 +1,9 @@
 import json
-from os import path
+import os
 from Exceptions.config_exception import ConfigException
 
 class ConfigReader:
 
-    @staticmethod
     def valida_config(db_address, db_name, db_user, db_passwd):
         return \
             db_address != "" and \
@@ -12,8 +11,7 @@ class ConfigReader:
             db_user    != "" and \
             db_passwd  != ""
 
-    config_filename = path.abspath("config/config.json")
-
+    config_filename = os.path.abspath("config/config.json")
     file = open(config_filename)
     config = json.load(file)
 

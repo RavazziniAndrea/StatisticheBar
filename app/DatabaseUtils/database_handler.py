@@ -7,17 +7,21 @@ query="SELECT r.quantita AS qta, r.descrizione AS tipo, ord.data as data, ord.or
 
 stop = False
 
-redis = Redis.Redis(host="172.17.0.2", port="6379")
+# redis = Redis.Redis(host="172.17.0.2", port="6379")
+redis = Redis.Redis(host="172.18.0.2", port="6379")
 
 def get_dati_db():
     conn = None
     try:
         conn = prendi_connessione()
         cursor = conn.cursor()
+
         old_count = 0
         while not stop:
+
             cursor.execute(query)
             dati = cursor.fetchall()
+
             count = dati.__len__
             if count != old_count:
                 old_count = count
@@ -25,7 +29,9 @@ def get_dati_db():
                     redis.publish("datidb", str(i))
                     #TODO, check che i dati precedenti vengano effettivamente tolti, se no ci si trova con mille dati su redis 
             time.sleep(3000)
+
         cursor.close()
+
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
