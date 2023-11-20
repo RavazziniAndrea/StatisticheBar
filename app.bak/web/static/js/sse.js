@@ -1,6 +1,6 @@
 
 function sseCommunication(){
-    console.log("Dentro sse communication")
+    console.log("Dentro")
     var evtSource = new EventSource("/stream");
     //var evtSource = new EventSource("{{ url_for('sse.sse') }}");
 

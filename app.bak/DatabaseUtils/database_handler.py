@@ -25,8 +25,13 @@ def get_dati_db():
     try:
         conn = prendi_connessione()
         cursor = conn.cursor()
+        print("flusho")
+        redis.flushall()
         old_count = 0
+        global stop 
+        stop = False
         while not stop:
+
             cursor.execute(query)
             dati = cursor.fetchall()
 
@@ -41,11 +46,10 @@ def get_dati_db():
                         #     str(dato_db.get_tipo()) + " " +
                         #     str(dato_db.get_data()) + " " +
                         #     str(dato_db.get_ora()))
-                        redis.publish("datidb", str(dato_db.get_qta() ) + " " + 
-                                                str(dato_db.get_tipo()) + " " +
-                                                str(dato_db.get_data()) + " " +
-                                                str(dato_db.get_ora())  )
-                        list_dati.append(dato_db)              
+                        redis.publish("datidb", "dato_db.__str__()")
+                        list_dati.append(dato_db)
+                    #TODO, check che i dati precedenti vengano effettivamente tolti, se no ci si trova con mille dati su redis 
+                
                 redis.publish("totaldb", str(list_dati.__len__()))
 
                 print("bastaaaaa"+str(list_dati.__len__()))

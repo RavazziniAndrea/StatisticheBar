@@ -1,0 +1,70 @@
+<html class="h-100">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <title>Statistiche Bar</title>
+    </head>
+    <body class="h-100">
+
+        {% include 'navbar.html' %}
+        
+        <div class="container-fluid h-100">
+            <div class="row h-100">
+                <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar min-vh-100">
+                    <div class="position-sticky h-100">
+                        <br>
+                        <h2>Seleziona un'opzione:</h2>
+                        <form name="selection-form" method="post"  action="">
+
+                            <div class="form-group">
+                                <label for="selectLabelGrafico">Grafico:</label>
+                                <select name="grafico" id="select-grafico" class="form-control form-control-sm">
+                                    <!--<option value="">Seleziona un'opzione</option>-->
+                                    <option value="0">---</option>
+                                    <option value="1">Incassi</option>
+                                    <option value="2">Totale cibo</option>
+                                    <option value="3">Totale bere</option>
+                                </select>
+                                <br>
+                                <label for="selectLabelTempo">Finezza:</label>
+                                <select name="tempo" id="select-tempo" class="form-control form-control-sm">
+                                    <!--<option value="">Seleziona un'opzione</option>-->
+                                    <option value="0">---</option>
+                                    <option value="1">Ora</option>
+                                    <option value="2">Giorno</option>
+                                    <option value="3">Mese</option>
+                                    <option value="4">Anno</option>
+                                </select>
+                            </div>
+                            <!--<button class="btn btn-primary" onClick="ajaxCall()">button</button>-->
+                            <input class="btn btn-primary" type="button" value="invio" onClick="ajaxCall()">
+                        </form>
+                    </div>
+                </nav>
+                
+                <div class="col-md-9 col-lg-10 col-xs-12 container m-0 w-100 d-flex justify-content-center align-items-center">
+                    <div class="col-9">
+                        <canvas id="grafico" class=""></canvas>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <script src="{{ url_for('static', filename='bootstrap/js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='notiflix/notiflix-aio-3.2.6.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='chart-js/chart.umd.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/ajax.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/sse.js') }}"></script>
+
+<!--         <script src="/web/resources/notiflix/notiflix-aio-3.2.6.min.js"></script>
+        <script src="/web/resources/bootstrap/js/jquery.min.js"></script>
+        <script src="/web/resources/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/web/resources/chart-js/chart.umd.js"></script>
+        <script src="/web/resources/sse.js"></script>
+        <script src="/web/resources/ajax.js"></script>
+        <script src="/web/resources/grafici.js"></script> -->
+    </body>
+</html>
