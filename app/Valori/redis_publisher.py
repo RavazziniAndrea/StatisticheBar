@@ -1,4 +1,5 @@
 import redis as Redis
+import json
 
 
 redis = Redis.Redis(host="172.17.0.2", port="6379")
@@ -10,7 +11,7 @@ class RedisPublisher:
         print("leggo e pubblico")
         pubsub = redis.pubsub()
         pubsub.subscribe("datidb")
-        num=0
+        datodb = {}
         for datodb in pubsub.listen():
             
             
@@ -19,9 +20,18 @@ class RedisPublisher:
         #     # 2. Creare le aggregazioni in base al grafico richiesto
         #     # 3. Pubblicare i dati in un nuovo redis, che verrà letto da event_stream() che a sua volta passerà al frontend
         #     #    I dati pubblicati devono avere tipo grafico, asse x e valori
-            num=num+1
-            print(str(num)+"<", end="")
 
+            # print(str(datodb))
+
+            record = str(datodb["data"]).removeprefix("b'")[:-8]
+            splitted = record.split("#")
+            if splitted.__len__() == 4:
+                qta = splitted[0]
+                tipo = splitted[1]
+                data = splitted[2]
+                ora = splitted[3]
+
+                print(tipo)
 
 
         print("gia finito?")

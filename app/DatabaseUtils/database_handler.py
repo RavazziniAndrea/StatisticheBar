@@ -41,14 +41,14 @@ def get_dati_db():
                         #     str(dato_db.get_tipo()) + " " +
                         #     str(dato_db.get_data()) + " " +
                         #     str(dato_db.get_ora()))
-                        redis.publish("datidb", str(dato_db.get_qta() ) + " " + 
-                                                str(dato_db.get_tipo()) + " " +
-                                                str(dato_db.get_data()) + " " +
+                        redis.publish("datidb", str(dato_db.get_qta() ) + "#" + 
+                                                str(dato_db.get_tipo()) + "#" +
+                                                str(dato_db.get_data()) + "#" +
                                                 str(dato_db.get_ora())  )
                         list_dati.append(dato_db)              
                 redis.publish("totaldb", str(list_dati.__len__()))
 
-                print("bastaaaaa"+str(list_dati.__len__()))
+                print("total"+str(list_dati.__len__()))
             time.sleep(3000)
 
         cursor.close()
