@@ -11,6 +11,7 @@ services:
     volumes:
       - redis-data:/data
 
+
   postgres:
     image: "postgres:latest"
     container_name: postgres
@@ -25,18 +26,55 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
-  flask-app:
+
+  mosquitto:
+    image: "eclipse-mosquitto:latest"
+    container_name: mosquitto
+    networks:
+      - mynetwork
+    ports:
+      - "1883:1883"
+
+
+  db_handler:
     build:
       context: .
-      dockerfile: Dockerfile
-    container_name: flaskapp
-    ports:
-      - "5000:5000"
+      dockerfile: DbHandler/Dockerfile
+    container_name: DbHandler
     networks:
       - mynetwork
     depends_on:
       - redis
       - postgres
+      - mosquitto  
+
+
+  # mqtt_handler:
+  #   build:
+  #     context: ./MqttHandler
+  #     dockerfile: Dockerfile
+  #   container_name: MqttHandler
+  #   networks:
+  #     - mynetwork
+  #   depends_on:
+  #     - redis
+  #     - postgres
+  #     - mosquitto  
+
+
+  # web_app:
+  #   build:
+  #     context: ./WebApp
+  #     dockerfile: Dockerfile
+  #   container_name: WebApp
+  #   ports:
+  #     - "5000:5000"
+  #   networks:
+  #     - mynetwork
+  #   depends_on:
+  #     - redis
+  #     - postgres
+  #     - mosquitto
 
 networks:
   mynetwork:
