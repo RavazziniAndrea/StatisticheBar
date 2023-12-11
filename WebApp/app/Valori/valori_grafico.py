@@ -1,8 +1,10 @@
 import redis as Redis
+
+import common_reader
 from Exceptions.dati_non_validi_exception import DatiNonValidiException
 
 
-redis = Redis.Redis(host="172.17.0.2", port="6379")
+redis = Redis.Redis(host=common_reader.redis_address, port=common_reader.redis_port)
 
 class ValoriGrafico:
 
@@ -13,6 +15,7 @@ class ValoriGrafico:
         self.tempo = tempo
         self.pubsub = redis.pubsub()
         self.pubsub.subscribe("datidb")
+        print("FINITO", flush=True)
 
 
     def scrivi_grafico(self):

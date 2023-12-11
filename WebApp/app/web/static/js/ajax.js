@@ -1,7 +1,6 @@
 function ajaxCall(){
     var grafico = document.getElementById("select-grafico").value
-    var tempo = document.getElementById("select-tempo").value
-
+    var tempo   = document.getElementById("select-tempo").value
     $.ajax({
         type: "POST",
         url: "/grafici",

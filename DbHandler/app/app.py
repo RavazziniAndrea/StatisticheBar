@@ -1,18 +1,17 @@
 
 import redis as Redis
+import time
 
-import DatabaseUtils
+import DatabaseUtils.database_handler as db_handler
+import common_reader
 from Exceptions import config_exception
 
 redis = None
 
 def publishData():
-    print("redis")
-
-def readCommonConfig():
-    print("okokokok")
+    db_handler.get_dati_db(redis)
 
 if __name__ == "__main__":
-    readCommonConfig()
-    redis = Redis.Redis(host="172.17.0.2", port="6379")
-    
+    print("Avvio DbHandler", flush=True)
+    redis = Redis.Redis(host=common_reader.redis_address, port=common_reader.redis_port)
+    publishData()

@@ -1,2 +1,0 @@
-class DatiNonValidiException(Exception):
-    pass
