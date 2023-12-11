@@ -24,8 +24,26 @@ stop = False
 #Questo è il metodo usato per passare i dati al frontend. Qui devo già avere tutti i dati parsati e pronti da servire 
 #I dati saranno: [tipo_grafico, asse x, valori]
 #E saranno codificati in una stringa, magari in json così js è veloce a tirarli fuori
-def event_stream():
-    print ("iaooooo", flush=True)
+def event_stream():    
+    pubsub = redis.pubsub()
+    # pubsub.subscribe('totaldb')
+    pubsub.subscribe('datidb')
+    try:
+        for message in pubsub.listen():
+            print (message)
+            # TODO gestire il primo messaggio che arriva, dato che è diverso dagli altri
+            yield 'data: %s\n\n' % message['data']
+    finally:
+        print("Esco")
+        global stop
+        stop = True
+
+    # msg = redis.xread(streams={"datidb":0})
+    # # print(msg)
+    # yield 'data: %s\n\n' % msg
+
+
+
 
 
 @app.route('/stream')
@@ -35,6 +53,7 @@ def stream():
 
 @app.route('/grafici', methods=["POST"])
 def grafici ():
+    redis.pubsub().unsubscribe() #TODO non funziona
     print("Grafici", flush=True)
     grafico = request.form['grafico']
     tempo =   request.form['tempo']

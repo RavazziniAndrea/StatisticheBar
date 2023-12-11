@@ -21,6 +21,11 @@ stop = False
 # redis_instance = Redis.Redis(host="172.17.0.2", port="6379")
 
 def get_dati_db(redis_instance):
+
+    while True:
+        print("iscritti: "+str(redis_instance.pubsub_numsub("datidb")), flush=True)
+        time.sleep(1)
+
     conn = None
     print("Connecting...")
     while conn is None:
@@ -54,12 +59,17 @@ def get_dati_db(redis_instance):
                         #     str(dato_db.get_tipo()) + " " +
                         #     str(dato_db.get_data()) + " " +
                         #     str(dato_db.get_ora()))
+                        # redis_instance.xadd("datidb", {"dati": str(dato_db.get_qta())})
+
                         redis_instance.publish("datidb", str(dato_db.get_qta() ) + "#" + 
                                                 str(dato_db.get_tipo()) + "#" +
                                                 str(dato_db.get_data()) + "#" +
                                                 str(dato_db.get_ora())  )
+                        # print("publicato", flush=True)
+                        # time.sleep(2)
+
                         list_dati.append(dato_db)              
-                redis_instance.publish("totaldb", str(list_dati.__len__()))
+                redis_instance.publish("totaldb ", str(list_dati.__len__()))
                 print("total"+str(list_dati.__len__()), flush=True)
             time.sleep(2)
 
