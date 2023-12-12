@@ -8,7 +8,12 @@ function ajaxCall(){
     grafico = document.getElementById("select-grafico").value
     tempo   = document.getElementById("select-tempo").value
     
-    if(old_grafico != grafico || old_tempo != tempo)
+    if(grafico == 0 || tempo == 0)
+    {
+        console.log("Selezionare un valore")
+        console.log("TODO, uscire un notiflix?")
+    }
+    else if(old_grafico != grafico || old_tempo != tempo)
     {
         old_grafico = grafico;
         old_tempo   = tempo;

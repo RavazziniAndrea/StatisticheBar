@@ -1,7 +1,5 @@
 
-docker-compose.yaml
-
-
+.vscode/
 __pycache__/
 *.py[cod]
 *$py.class
