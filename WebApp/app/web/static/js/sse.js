@@ -1,15 +1,28 @@
 
-function sseCommunication(){
-    console.log("Dentro sse communication")
-    var evtSource = new EventSource("/stream");
-    //var evtSource = new EventSource("{{ url_for('sse.sse') }}");
+//var isSseStarted=false;
 
-    evtSource.onmessage = function (e) {
-        console.log("message: " + e.data);
-        // dataArray
+var evtSource = null;
+
+function sseCommunication(){
+
+    if(evtSource != null)
+    {
+        evtSource.close()
+        console.log("sse chiuso");
     }
 
-    evtSource.onerror = function (e) {
+    console.log("Dentro sse communication");
+
+    evtSource = new EventSource("/stream");
+
+    evtSource.onmessage = function (e) 
+    {
+        console.log("message: " + e.data);
+    }
+
+    evtSource.onerror = function (e) 
+    {
         console.log("sse failed");
+        evtSource.close();
     }
 }

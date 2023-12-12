@@ -22,7 +22,7 @@ stop = False
 
 def get_dati_db(redis_instance):
 
-    while True:
+    while int(redis_instance.pubsub_numsub("datidb")[0][1]) < 1:
         print("iscritti: "+str(redis_instance.pubsub_numsub("datidb")), flush=True)
         time.sleep(1)
 
@@ -61,10 +61,12 @@ def get_dati_db(redis_instance):
                         #     str(dato_db.get_ora()))
                         # redis_instance.xadd("datidb", {"dati": str(dato_db.get_qta())})
 
-                        redis_instance.publish("datidb", str(dato_db.get_qta() ) + "#" + 
+                        redis_instance.publish("datidb", 
+                                                "#" + 
+                                                str(dato_db.get_qta() ) + "#" + 
                                                 str(dato_db.get_tipo()) + "#" +
                                                 str(dato_db.get_data()) + "#" +
-                                                str(dato_db.get_ora())  )
+                                                str(dato_db.get_ora())  + "#" )
                         # print("publicato", flush=True)
                         # time.sleep(2)
 
