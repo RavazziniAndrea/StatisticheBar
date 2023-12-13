@@ -30,23 +30,8 @@ def event_stream():
 
             record = Record.fromMessage(message)
             if record is None: continue
-            # print(record.toStr())
 
-            if valori.get_tempo == 1: #ore
-                print("ore")
-            elif valori.get_tempo == 2: #Giorni
-                print("Giorni")
-            elif valori.get_tempo == 3: #Mesi
-                print("Mesi")
-            elif valori.get_tempo == 4: #Anni
-                print("Anni")
-
-            #TODO, quindi elaboro tutti i dati che mi arrivano da redis, 
-            # poi quando li ho tutti a posto, li invio via sse così che il grafico venga riscritto-
-            # Questo perchè se no l'ultimo punto del grafico non può essere aggiornato
-
-
-        yield 'data: %s\n\n' % "qui ci vanno i dati per js [tipo_grafico, asse x, valori]"
+            yield 'data: %s\n\n' % message["data"]
 
     finally:
         print("Esco")

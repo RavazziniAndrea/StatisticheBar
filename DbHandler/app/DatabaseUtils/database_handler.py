@@ -22,9 +22,9 @@ stop = False
 
 def get_dati_db(redis_instance):
 
-    while int(redis_instance.pubsub_numsub("datidb")[0][1]) < 1:
-        print("iscritti: "+str(redis_instance.pubsub_numsub("datidb")), flush=True)
-        time.sleep(1)
+    # while int(redis_instance.pubsub_numsub("datidb")[0][1]) < 1:
+    #     print("iscritti: "+str(redis_instance.pubsub_numsub("datidb")), flush=True)
+    #     time.sleep(1)
 
     conn = None
     print("Connecting...")
@@ -42,13 +42,25 @@ def get_dati_db(redis_instance):
     try:
         cursor = conn.cursor()
         old_count = 0
+        old_subscribers = 0
         while not stop:
+
+            subscribers = redis_instance.pubsub_numsub("datidb")[0][1]
+
+            if subscribers == 0: 
+                time.sleep(1)
+                continue
+                
+            
+
             cursor.execute(query)
             dati = cursor.fetchall()
             count = dati.__len__()
-            if count != old_count:
+
+            if count != old_count or old_subscribers != subscribers:
                 old_count = count
-                print("Trovati nuovi record", flush=True)
+                old_subscribers = subscribers
+                print("Lettura db", flush=True)
                 redis_instance.delete("datidb")
                 list_dati = []
                 for i in dati:
