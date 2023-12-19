@@ -27,7 +27,7 @@ function sseCommunication(){
         var date = vals[3];
         var time = vals[4].split('.')[0];
 
-        dataArray.push(i++);
+        dataArray.push(new Record(qty, type, date, time));
         aggiornaChart();
 
         // console.log("qty: " + qty + "type: " + type + "date: " + date + "time: " + time)

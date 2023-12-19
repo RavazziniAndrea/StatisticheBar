@@ -18,8 +18,8 @@
                         <form name="selection-form" method="post"  action="">
 
                             <div class="form-group">
-                                <label for="selectLabelGrafico">Grafico:</label>
-                                <select name="grafico" id="select-grafico" class="form-control form-control-sm">
+                                <label for="selectLabelTipo">Tipo:</label>
+                                <select name="Tipo" id="select-tipo" class="form-control form-control-sm">
                                     <!--<option value="">Seleziona un'opzione</option>-->
                                     <option value="0">---</option>
                                     <option value="1">Incassi</option>
@@ -31,10 +31,17 @@
                                 <select name="tempo" id="select-tempo" class="form-control form-control-sm">
                                     <!--<option value="">Seleziona un'opzione</option>-->
                                     <option value="0">---</option>
-                                    <option value="1">Ora</option>
-                                    <option value="2">Giorno</option>
-                                    <option value="3">Mese</option>
-                                    <option value="4">Anno</option>
+                                    <option value="1">Giorno</option>
+                                    <option value="2">Mese</option>
+                                    <option value="3">Anno</option>
+                                    <option value="4">Sempre</option>
+                                </select>                                
+                                <br>
+                                <label for="selectLabelGrafico">Grafico:</label>
+                                <select name="grafico" id="select-grafico" class="form-control form-control-sm">
+                                    <!--<option value="">Seleziona un'opzione</option>-->
+                                    <option value="0">Linee</option>
+                                    <option value="1">Torta</option>
                                 </select>
                             </div>
                             <!--<button class="btn btn-primary" onClick="ajaxCall()">button</button>-->
@@ -58,6 +65,7 @@
         <script src="{{ url_for('static', filename='chart-js/chart.umd.js') }}"></script>
         <script src="{{ url_for('static', filename='js/ajax.js') }}"></script>
         <script src="{{ url_for('static', filename='js/sse.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/record.js') }}"></script>
         <script src="{{ url_for('static', filename='js/grafici.js') }}"></script>
 
 <!--         <script src="/web/resources/notiflix/notiflix-aio-3.2.6.min.js"></script>

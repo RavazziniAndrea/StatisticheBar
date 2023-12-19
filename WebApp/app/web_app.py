@@ -45,12 +45,12 @@ def stream():
 @app.route('/grafici', methods=["POST"])
 def grafici ():
     redis.pubsub().close() #unsubscribe("datidb")
-    print("Grafici", flush=True)
-    grafico = request.form['grafico']
-    tempo =   request.form['tempo']
+    # print("Grafici", flush=True)
+    # grafico = request.form['grafico'] #TODO in realtà questi non servono. Li prendo diretti da js
+    # tempo =   request.form['tempo']
 
-    global valori
-    valori = ValoriGrafico(grafico, tempo)
+    # global valori
+    # valori = ValoriGrafico(grafico, tempo)
     return "AjaxBackendFinito"
 
 
