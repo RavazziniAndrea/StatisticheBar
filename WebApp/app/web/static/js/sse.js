@@ -3,6 +3,8 @@
 
 var evtSource = null;
 
+var newGraph = false;
+
 function sseCommunication(){
 
     if(evtSource != null)
@@ -12,8 +14,10 @@ function sseCommunication(){
     }
 
     console.log("Dentro sse communication");
+    newGraph = true
 
     evtSource = new EventSource("/stream");
+
 
     var i = 0;
 

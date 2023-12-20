@@ -13,7 +13,8 @@ WHERE ord.data IS NOT NULL
 AND ord.ora IS NOT NULL 
 AND (ra.desc_tipologia = 'alcool' 
 OR ra.desc_tipologia = 'super')
-ORDER BY ord.data ASC, ord.ora ASC"""
+ORDER BY ord.data ASC, ord.ora ASC 
+--LIMIT 500"""
 
 stop = False
 
