@@ -2,12 +2,16 @@ FROM python:3.8-slim
 
 WORKDIR /
 
-COPY requirementsMqtt.txt .
+COPY common/ /MqttHandler/app
+
+WORKDIR /MqttHandler/app
+
+COPY /MqttHandler/app/requirementsMqtt.txt .
+
+COPY /MqttHandler/mosquitto.conf /
 
 RUN pip install -r requirementsMqtt.txt
 
-COPY . .
+COPY /MqttHandler/app .
 
-WORKDIR /app
-
-CMD ["python", "mqttHandler.py"]
+CMD ["python", "app.py"]

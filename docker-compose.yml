@@ -12,20 +12,6 @@ services:
     volumes:
       - redis-data:/data
 
-  # postgres:
-  #   image: "postgres:latest"
-  #   container_name: postgres
-  #   ports:
-  #     - "5432:5432"
-  #   networks:
-  #     - docker_net
-  #   environment:
-  #     POSTGRES_DB: db_name
-  #     POSTGRES_USER: db_user
-  #     POSTGRES_PASSWORD: db_passwd
-  #   volumes:
-  #     - postgres-data:/var/lib/postgresql/data
-
 
   mosquitto:
     image: "eclipse-mosquitto:latest"
@@ -52,17 +38,16 @@ services:
       - mosquitto  
 
 
-  # mqtt_handler:
-  #   build:
-  #     context: ./MqttHandler
-  #     dockerfile: Dockerfile
-  #   container_name: MqttHandler
-  #   networks:
-  #     - docker_net
-  #   depends_on:
-  #     - redis
-  #     - postgres
-  #     - mosquitto  
+  mqtt_handler:
+    build:
+      context: .
+      dockerfile: MqttHandler/Dockerfile
+    container_name: MqttHandler
+    networks:
+      - docker_net
+    depends_on:
+      - redis
+      - mosquitto  
 
 
   web_app:
@@ -76,7 +61,6 @@ services:
       - docker_net
     depends_on:
       - redis
-      # - postgres
       - mosquitto
 
 networks:
