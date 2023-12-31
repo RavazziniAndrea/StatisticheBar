@@ -64,7 +64,6 @@ function aggiornaChart(){
         mapInDataset.set("data", arrData)  
         
         var color = getRandomColor();
-
         var ds = {
             label: record.type,
             fillColor: color,
@@ -72,7 +71,7 @@ function aggiornaChart(){
             highlightFill: color,
             highlightStroke: color,
             backgroundColor: color,
-            bordercolor: color,
+            borderColor: ((graph == 0) ? color : "#000000"),
             data: arrData
         }
 
@@ -86,7 +85,7 @@ function aggiornaChart(){
 
     chart.data.datasets[ix].data[numLabels -1] = parseInt(qtyOld) + parseInt(record.qty)
 
-    console.log(chart.data)
+    // console.log(chart.data)
     chart.update()
 }
 

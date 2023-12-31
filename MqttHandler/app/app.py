@@ -1,6 +1,7 @@
 
 import redis as Redis
 import paho.mqtt.client as mqtt
+import time
 
 import mqtt_config_reader as mcr
 import common_reader
@@ -10,6 +11,8 @@ redis = None
 client = None
 reconnect = True
 
+def getTopicFromMsg(message):
+    return "bere" #TODO finire
 
 def startListening():
     print("start listening", flush=True)
@@ -17,9 +20,12 @@ def startListening():
     pubsub.subscribe('datidb')
     try:
         for message in pubsub.listen():
-            client.publish("all", message)
 
-            yield 'wait'
+            # topic = getTopicFromMsg(message)
+
+            client.publish("all", str(message["data"]))
+            # client.publish(str(topic), str(message["data"]))
+            # print(str(message["data"]), flush=True)
 
     finally:
         print("Esco")
@@ -27,20 +33,19 @@ def startListening():
 def connect():
     return client.connect(mcr.mqtt_address, int(mcr.mqtt_port), 60)
 
-def onConnect():
+def on_connect():
     print("MQTT Connected.", flush=True)
 
 def onDisconnect():
     print("Disconnected", flush=True)
     # if(reconnect): connect()
 
-def onPublish():
-    print("Published MQTT", flush=True)
+# def onPublish():
+#     print("Published MQTT", flush=True)
 
 def setup():
-    client.on_connect = onConnect
-    client.on_publish = onPublish
-    client.on_disconnect = onDisconnect
+    # client.on_connect = on_connect
+    # client.on_disconnect = onDisconnect
     if connect() != 0: print("Can't connect", flush=True)
     client.loop_start()
     startListening()

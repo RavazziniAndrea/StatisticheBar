@@ -19,8 +19,11 @@ services:
     networks:
       docker_net:
         ipv4_address: 172.42.0.11
+      # mqtt_net:
     ports:
       - "1883:1883"
+    volumes:
+      - ./MqttHandler/config:/mosquitto/config
     depends_on:
       - redis
 
@@ -35,7 +38,7 @@ services:
       - docker_net
     depends_on:
       - redis
-      - mosquitto  
+      - mosquitto
 
 
   mqtt_handler:
@@ -47,7 +50,7 @@ services:
       - docker_net
     depends_on:
       - redis
-      - mosquitto  
+      - mosquitto
 
 
   web_app:
@@ -63,17 +66,16 @@ services:
       - redis
       - mosquitto
 
+
 networks:
   docker_net:
     driver: bridge
     external: true
-    # ipam:
-    #   config:
-    #     - subnet: 172.42.0.0/16
-    #       gateway: 172.42.0.1
   ext_net:
     external: true
+  # mqtt_net:
+  #   external: true
+
 
 volumes:
   redis-data:
-  # postgres-data:

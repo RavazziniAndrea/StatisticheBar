@@ -24,19 +24,16 @@ function ajaxCall(){
 
         $.ajax({
             type: "POST",
-            url: "/grafici",
+            url: "/graph",
             data: jQuery.param({ 
-                grafico: grafico,
-                tempo  : tempo
+                graph: graph,
+                time  : time
             }),
-            success: function (response) {
-                console.log(response + " TODO Da qui devo tirare fuori i grafici")
-            },
             complete: function(response) {
-                sseCommunication()
+                sseCommunication() //create EventStream
             },
             error: function (status, error) {
-                console.log("Errore AJAX, TODO usare notiflix")
+                console.log("AJAX Error")
             }
         });
     }

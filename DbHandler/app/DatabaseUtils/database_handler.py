@@ -12,6 +12,7 @@ JOIN righe_articoli ra ON r.id = ra.id_riga
 WHERE ord.data IS NOT NULL 
 AND ord.ora IS NOT NULL 
 AND (ra.desc_tipologia = 'alcool' 
+AND ord.data < '31-12-2022'
 OR ra.desc_tipologia = 'super')
 ORDER BY ord.data ASC, ord.ora ASC 
 --LIMIT 500"""
